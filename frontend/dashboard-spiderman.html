@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antigravity Financial Intelligence</title>
+  <title>Spider-Sense Financial Intelligence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -15,65 +15,89 @@
 
   <style>
     :root {
-      --bg-base: #f8fafc;
+      --spidey-red: #e23636;
+      --spidey-red-dark: #b71c1c;
+      --spidey-blue: #2962ff;
+      --spidey-blue-dark: #0039cb;
+      --spidey-blue-darker: #001970;
+      --web-grey: #424242;
+      --bg-base: #fef7f7;
       --bg-card: #ffffff;
-      --bg-card-muted: #f1f5f9;
-      --border: #e2e8f0;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --accent: #2563eb;
-      --bullish: #059669;
-      --bullish-bg: #ecfdf5;
-      --bearish: #dc2626;
-      --bearish-bg: #fef2f2;
-      --warning: #d97706;
-      --warning-bg: #fffbeb;
-      --font-heading: 'Plus Jakarta Sans', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg-card-muted: #fff5f5;
+      --border: #ffcdd2;
+      --text-main: #1a1a1a;
+      --text-muted: #616161;
+      --accent: #2962ff;
+      --bullish: #2e7d32;
+      --bullish-bg: #e8f5e9;
+      --bearish: #c62828;
+      --bearish-bg: #ffebee;
+      --warning: #f57c00;
+      --warning-bg: #fff3e0;
+      --font-heading: 'Bangers', cursive;
+      --font-body: 'Roboto', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
     }
 
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg-base: #090d16;
-        --bg-card: #111827;
-        --bg-card-muted: #1e293b;
-        --border: #1f293d;
-        --text-main: #f8fafc;
-        --text-muted: #94a3b8;
-        --accent: #3b82f6;
-        --bullish: #10b981;
-        --bullish-bg: rgba(16, 185, 129, 0.12);
-        --bearish: #ef4444;
-        --bearish-bg: rgba(239, 68, 68, 0.12);
-        --warning: #f59e0b;
-        --warning-bg: rgba(245, 158, 11, 0.12);
+        --bg-base: #0a0a0f;
+        --bg-card: #1a1a2e;
+        --bg-card-muted: #16213e;
+        --border: #3d1f1f;
+        --text-main: #f5f5f5;
+        --text-muted: #b0bec5;
+        --accent: #448aff;
+        --bullish: #66bb6a;
+        --bullish-bg: rgba(46, 125, 50, 0.15);
+        --bearish: #ef5350;
+        --bearish-bg: rgba(198, 40, 40, 0.15);
+        --warning: #ffa726;
+        --warning-bg: rgba(245, 124, 0, 0.15);
       }
     }
 
     :root[data-theme="dark"] {
-      --bg-base: #090d16;
-      --bg-card: #111827;
-      --bg-card-muted: #1e293b;
-      --border: #1f293d;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #3b82f6;
-      --bullish: #10b981;
-      --bullish-bg: rgba(16, 185, 129, 0.12);
-      --bearish: #ef4444;
-      --bearish-bg: rgba(239, 68, 68, 0.12);
-      --warning: #f59e0b;
-      --warning-bg: rgba(245, 158, 11, 0.12);
+      --bg-base: #0a0a0f;
+      --bg-card: #1a1a2e;
+      --bg-card-muted: #16213e;
+      --border: #3d1f1f;
+      --text-main: #f5f5f5;
+      --text-muted: #b0bec5;
+      --accent: #448aff;
+      --bullish: #66bb6a;
+      --bullish-bg: rgba(46, 125, 50, 0.15);
+      --bearish: #ef5350;
+      --bearish-bg: rgba(198, 40, 40, 0.15);
+      --warning: #ffa726;
+      --warning-bg: rgba(245, 124, 0, 0.15);
     }
 
     body {
       background-color: var(--bg-base);
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(226, 54, 54, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(41, 98, 255, 0.03) 0%, transparent 50%);
       color: var(--text-main);
       font-family: var(--font-body);
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(226, 54, 54, 0.02) 80px, rgba(226, 54, 54, 0.02) 81px),
+        repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(41, 98, 255, 0.02) 80px, rgba(41, 98, 255, 0.02) 81px);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .font-mono-nums {
@@ -83,13 +107,17 @@
 
     .font-heading {
       font-family: var(--font-heading);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
     .badge-simulated {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      background: linear-gradient(135deg, var(--spidey-red) 0%, var(--spidey-red-dark) 100%);
       color: #ffffff;
       font-weight: 700;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      border: 2px solid rgba(255,255,255,0.3);
     }
 
     .custom-scrollbar::-webkit-scrollbar {
@@ -125,6 +153,69 @@
     }
     .flash-red {
       animation: flash-down 0.8s ease-out;
+    }
+    @keyframes spidey-pulse {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(226, 54, 54, 0.4), 0 0 20px rgba(41, 98, 255, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(226, 54, 54, 0.8), 0 0 35px rgba(41, 98, 255, 0.5);
+      }
+    }
+
+    .spidey-glow {
+      animation: spidey-pulse 2s infinite ease-in-out;
+    }
+
+    .web-pattern {
+      background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .comic-card {
+      border: 2px solid var(--border);
+      box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+
+    .comic-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 6px 6px 0px rgba(226, 54, 54, 0.2);
+    }
+
+    .spidey-btn-primary {
+      background: linear-gradient(135deg, var(--spidey-red) 0%, var(--spidey-red-dark) 100%);
+      color: white;
+      border: 2px solid #b71c1c;
+      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .spidey-btn-primary:hover {
+      background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
+      transform: translateY(-1px);
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .spidey-btn-secondary {
+      background: linear-gradient(135deg, var(--spidey-blue) 0%, var(--spidey-blue-dark) 100%);
+      color: white;
+      border: 2px solid #0039cb;
+      box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .spidey-btn-secondary:hover {
+      background: linear-gradient(135deg, #448aff 0%, #1565c0 100%);
+      transform: translateY(-1px);
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    .spider-sense-badge {
+      background: linear-gradient(135deg, #ffd700 0%, #ff9800 100%);
+      color: #000;
+      font-weight: 800;
+      animation: pulse-dot 1.2s infinite;
     }
   </style>
 </head>
@@ -252,13 +343,13 @@
       const ctx = canvasRef.current.getContext('2d');
       if (chartRef.current) chartRef.current.destroy();
 
-      const textColor = isDark ? '#94a3b8' : '#64748b';
-      const gridColor = isDark ? 'rgba(31, 41, 61, 0.6)' : 'rgba(226, 232, 240, 0.8)';
+      const textColor = isDark ? '#b0bec5' : '#616161';
+      const gridColor = isDark ? 'rgba(61, 31, 31, 0.4)' : 'rgba(255, 205, 210, 0.5)';
       const isUp = history.length > 1 ? history[history.length - 1].price >= history[0].price : true;
-      const lineColor = isUp ? (isDark ? '#10b981' : '#059669') : (isDark ? '#ef4444' : '#dc2626');
+      const lineColor = isUp ? '#2962ff' : '#e23636'; // Web-Slinger Blue for Up, Spidey Red for Down
       const gradientBg = isUp
-        ? (isDark ? 'rgba(16, 185, 129, 0.12)' : 'rgba(5, 150, 105, 0.08)')
-        : (isDark ? 'rgba(239, 68, 68, 0.12)' : 'rgba(220, 38, 38, 0.08)');
+        ? (isDark ? 'rgba(41, 98, 255, 0.15)' : 'rgba(41, 98, 255, 0.08)')
+        : (isDark ? 'rgba(226, 54, 54, 0.15)' : 'rgba(226, 54, 54, 0.08)');
 
       const labels = history.map(h => h.time);
       const dataPoints = history.map(h => h.price);
@@ -280,20 +371,22 @@
               data: dataPoints,
               borderColor: lineColor,
               backgroundColor: gradientBg,
-              borderWidth: 2.5,
+              borderWidth: 3,
               fill: true,
               tension: 0.35,
-              pointRadius: history.length > 30 ? 0 : 3,
-              pointHoverRadius: 6,
+              pointRadius: history.length > 30 ? 0 : 4,
+              pointHoverRadius: 7,
               pointBackgroundColor: lineColor,
+              pointBorderColor: '#ffffff',
+              pointBorderWidth: 2,
               order: 2
             },
             {
-              label: 'SMA (5-Tick)',
+              label: 'Spider-Sense MA (5-Tick)',
               data: sma5,
-              borderColor: isDark ? '#f59e0b' : '#d97706',
-              borderWidth: 1.5,
-              borderDash: [4, 4],
+              borderColor: '#ffd700', // Spider-Sense Gold
+              borderWidth: 2,
+              borderDash: [5, 5],
               fill: false,
               tension: 0.3,
               pointRadius: 0,
@@ -372,22 +465,22 @@
       const ctx = canvasRef.current.getContext('2d');
       if (chartRef.current) chartRef.current.destroy();
 
-      const textColor = isDark ? '#94a3b8' : '#64748b';
+      const textColor = isDark ? '#b0bec5' : '#616161';
 
       chartRef.current = new Chart(ctx, {
         type: 'doughnut',
         data: {
-          labels: ['📈 Momentum', '📑 Sentiment', '🏛️ Fundamentals'],
+          labels: ['🕸️ Web-Slinger Momentum', '📰 Daily Bugle Sentiment', '🔬 Peter Parker Fundamentals'],
           datasets: [{
             data: [weights.momentum, weights.sentiment, weights.fundamentals],
             backgroundColor: [
-              isDark ? 'rgba(245, 158, 11, 0.85)' : 'rgba(217, 119, 6, 0.85)',
-              isDark ? 'rgba(168, 85, 247, 0.85)' : 'rgba(147, 51, 234, 0.85)',
-              isDark ? 'rgba(59, 130, 246, 0.85)' : 'rgba(37, 99, 235, 0.85)'
+              '#e23636', // Spidey Red (Momentum)
+              '#ffd700', // Spider-Sense Gold (Sentiment)
+              '#2962ff'  // Web-Slinger Blue (Fundamentals)
             ],
-            borderColor: isDark ? '#111827' : '#ffffff',
-            borderWidth: 2,
-            hoverOffset: 4
+            borderColor: isDark ? '#1a1a2e' : '#ffffff',
+            borderWidth: 3,
+            hoverOffset: 6
           }]
         },
         options: {
@@ -399,16 +492,16 @@
               position: 'bottom',
               labels: {
                 color: textColor,
-                font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
+                font: { family: 'Roboto', size: 11, weight: '700' },
                 padding: 12
               }
             },
             tooltip: {
-              backgroundColor: isDark ? '#111827' : '#ffffff',
+              backgroundColor: isDark ? '#1a1a2e' : '#ffffff',
               titleColor: textColor,
               bodyColor: textColor,
-              borderColor: isDark ? '#1f293d' : '#e2e8f0',
-              borderWidth: 1,
+              borderColor: '#e23636',
+              borderWidth: 2,
               callbacks: {
                 label: (ctx) => ` ${ctx.label}: ${ctx.parsed}%`
               }
@@ -680,19 +773,19 @@
     return (
       <div className="min-h-screen flex flex-col" style={{ backgroundColor: "var(--bg-base)" }}>
         {/* Top App Header */}
-        <header className="border-b px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40 backdrop-blur" style={{ backgroundColor: "var(--bg-card)", borderColor: "var(--border)" }}>
+        <header className="border-b px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40 backdrop-blur comic-card" style={{ backgroundColor: "var(--bg-card)", borderColor: "var(--border)" }}>
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-sm shadow-blue-500/20">
-              ⚡
+            <div className="w-10 h-10 rounded-xl spidey-glow flex items-center justify-center text-white font-bold text-2xl" style={{ background: "linear-gradient(135deg, #e23636 0%, #2962ff 100%)" }}>
+              🕷️
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-heading font-bold text-lg tracking-tight">Antigravity Financial Intelligence</h1>
+                <h1 className="font-heading font-bold text-xl tracking-tight" style={{ color: "var(--spidey-red)" }}>Spider-Sense Financial Intelligence</h1>
                 <span className="badge-simulated text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider">
-                  PS-01 AUTONOMOUS ENGINE
+                  WEB-SLINGER AI
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Multi-Agent Autonomous Financial Intelligence for Retail Investors</p>
+              <p className="text-xs font-medium" style={{ color: "var(--text-muted)" }}>🕸️ Web-Crawling Multi-Agent System for Market Intelligence</p>
             </div>
           </div>
 
@@ -701,33 +794,33 @@
             {/* Live Indicator & Toggle */}
             <button
               onClick={() => setIsLive(!isLive)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-bold border transition-all ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold font-mono border-2 transition-all ${
                 isLive
-                  ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border-emerald-500/40 shadow-sm'
+                  ? 'spidey-btn-primary'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-500 border-slate-300 dark:border-slate-700'
               }`}
             >
-              <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-emerald-500 animate-pulse-dot' : 'bg-slate-400'}`}></span>
-              {isLive ? 'LIVE STREAMING' : 'STREAM PAUSED'}
+              <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-yellow-300 animate-pulse-dot' : 'bg-slate-400'}`}></span>
+              {isLive ? '🕷️ SPIDER-SENSE ACTIVE' : 'SPIDER-SENSE IDLE'}
             </button>
 
             {/* Speed Control */}
-            <div className="flex items-center border rounded-lg overflow-hidden text-[11px] font-mono" style={{ borderColor: "var(--border)" }}>
+            <div className="flex items-center border-2 rounded-lg overflow-hidden text-[11px] font-mono font-bold" style={{ borderColor: "var(--spidey-red)" }}>
               <button
                 onClick={() => setStreamSpeedMs(2500)}
-                className={`px-2 py-1.5 transition-colors ${streamSpeedMs === 2500 ? 'bg-blue-600 text-white font-bold' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500'}`}
+                className={`px-2.5 py-1.5 transition-all ${streamSpeedMs === 2500 ? 'spidey-btn-secondary' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500'}`}
               >
-                1x
+                WEB-SWING 1x
               </button>
               <button
                 onClick={() => setStreamSpeedMs(1500)}
-                className={`px-2 py-1.5 transition-colors ${streamSpeedMs === 1500 ? 'bg-blue-600 text-white font-bold' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500'}`}
+                className={`px-2.5 py-1.5 transition-all ${streamSpeedMs === 1500 ? 'spidey-btn-secondary' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500'}`}
               >
                 2x
               </button>
               <button
                 onClick={() => setStreamSpeedMs(800)}
-                className={`px-2 py-1.5 transition-colors ${streamSpeedMs === 800 ? 'bg-blue-600 text-white font-bold' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500'}`}
+                className={`px-2.5 py-1.5 transition-all ${streamSpeedMs === 800 ? 'spidey-btn-secondary' : 'hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500'}`}
               >
                 3x
               </button>
@@ -736,18 +829,17 @@
             {/* Manual Step Button */}
             <button
               onClick={() => executeMarketTick()}
-              title="Step 1 Market Tick"
-              className="px-2.5 py-1.5 rounded-lg border text-xs font-mono hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              style={{ borderColor: "var(--border)" }}
+              title="Web One Market Tick"
+              className="px-2.5 py-1.5 rounded-lg border-2 text-xs font-mono font-bold hover:scale-105 transition-all spidey-btn-primary"
             >
-              ⏩ +1 Tick
+              🕸️ +1 Tick
             </button>
 
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
-              className="p-1.5 rounded-lg border text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              style={{ borderColor: "var(--border)" }}
+              className="p-1.5 rounded-lg border-2 text-sm hover:scale-105 transition-all comic-card"
+              style={{ borderColor: "var(--spidey-blue)" }}
             >
               {theme === 'dark' ? '☀️' : '🌙'}
             </button>
@@ -755,57 +847,55 @@
         </header>
 
         {/* Section Navigation Tabs Bar */}
-        <nav className="border-b px-6 py-2 flex items-center justify-between gap-4 overflow-x-auto custom-scrollbar" style={{ backgroundColor: "var(--bg-card)", borderColor: "var(--border)" }}>
+        <nav className="border-b px-6 py-2 flex items-center justify-between gap-4 overflow-x-auto custom-scrollbar web-pattern" style={{ backgroundColor: "var(--bg-card)", borderColor: "var(--border)" }}>
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => setActiveSection("live")}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
                 activeSection === 'live'
-                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                  ? 'spidey-btn-primary'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
-              <span>📊</span> Live Intelligence
+              <span>🕷️</span> Web Intelligence
             </button>
             <button
               onClick={() => setActiveSection("profiles")}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
                 activeSection === 'profiles'
-                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                  ? 'spidey-btn-primary'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
-              <span>⚖️</span> Profile Comparison
+              <span>🦸</span> Hero Profiles
             </button>
             <button
               onClick={() => setActiveSection("accuracy")}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
                 activeSection === 'accuracy'
-                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                  ? 'spidey-btn-primary'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
-              <span>📈</span> Session Logs & Accuracy
+              <span>📰</span> Daily Bugle Logs
             </button>
             <button
               onClick={() => setActiveSection("rag")}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
                 activeSection === 'rag'
-                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                  ? 'spidey-btn-primary'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
               }`}
             >
-              <span>📑</span> RAG & SEBI LODR
+              <span>🔬</span> Parker Research
             </button>
             <button
               onClick={() => setActiveSection("stress")}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                activeSection === 'stress'
-                  ? 'bg-blue-600 text-white shadow-sm font-semibold'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800'
+              className={`spidey-btn-primary flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                activeSection === 'stress' ? 'ring-2 ring-offset-1' : ''
               }`}
             >
-              <span>🛡️</span> Fault Tolerance Testing
+              <span>🛡️</span> Oscorp Stress Lab
             </button>
           </div>
 
